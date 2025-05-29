@@ -32,8 +32,8 @@ model User {
   comments Comment[]
   likes    Like[]
 
-  followers Follows[] @relation("following") // users who follow this user
-  following Follows[] @relation("follower") // users this user follow
+  followers Follows[] @relation("follower") // users who follow this user
+  following Follows[] @relation("following") // users this user follow
 
   notifications        Notification[] @relation("userNotifications") // notifications received by a user
   notificationsCreated Notification[] @relation("notificationCreator") // notifications triggered by a user
