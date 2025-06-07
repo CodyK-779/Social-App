@@ -9,6 +9,8 @@ import { Button } from "./ui/button";
 import { ImageIcon, Loader2Icon, SendIcon } from "lucide-react";
 import { createPost } from "@/actions/post.action";
 import toast from "react-hot-toast";
+import ImageUpload from "./ImageUpload";
+import { url } from "inspector";
 
 const CreatePost = () => {
   const { user } = useUser();
@@ -44,7 +46,7 @@ const CreatePost = () => {
         <div className="space-y-4">
           <div className="flex space-x-4">
             <Avatar className="w-10 h-10">
-              <AvatarImage src={user?.imageUrl || "/avatar.png"} />
+              <AvatarImage src={user?.imageUrl || "../public/avatar.png"} />
             </Avatar>
             <Textarea
               placeholder="What's on your mind?"
@@ -54,6 +56,19 @@ const CreatePost = () => {
               disabled={isPosting}
             />
           </div>
+
+          {(showImgUpload || imageUrl) && (
+            <div className="border rounded-lg p-4">
+              <ImageUpload
+                endpoint="postImage"
+                value={imageUrl}
+                onChange={(url) => {
+                  setImageUrl(url);
+                  if (!url) setShowImgUpload(false);
+                }}
+              />
+            </div>
+          )}
 
           <div className="flex items-center justify-between border-t pt-4">
             <div className="flex space-x-2">
